@@ -21,7 +21,6 @@
             <v-icon color="white">fa-compress-arrows-alt</v-icon>
             <p>60 hPa</p>
           </v-col>
-
         </v-row>
       </v-card>
     </v-container>

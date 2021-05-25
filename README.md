@@ -1,19 +1,23 @@
-# org.weather
+# Umbrella:
+Weather app written in vue.js running with the help of cordova.
+<br>"Open Weather Map" is used as the provider for the weather data.
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
+## Setup:
+Install JavaScript packages with npm:
+```bash
+npm i
 ```
-npm run serve
+Run webpack dev server with hot-reload:
+```bash
+npm run dev
 ```
-
-### Compiles and minifies for production
-```
+Create a production build:
+```bash
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Build with cordova for android platform:
+```bash
+cordova prepare
+cordova build android
+```
