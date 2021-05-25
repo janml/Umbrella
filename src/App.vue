@@ -23,4 +23,12 @@ export default {
   body, html {
     height: 100%;
   }
+
+  .is-transparent {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .is-white {
+    color: white
+  }
 </style>
