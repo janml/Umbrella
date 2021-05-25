@@ -2,8 +2,8 @@
   "name": "umbrella",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "dev": "vue-cli-service serve --mode dev",
+    "build": "vue-cli-service build --mode prod"
   },
   "main": "index.js",
   "dependencies": {
