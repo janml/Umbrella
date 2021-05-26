@@ -1,3 +1,7 @@
+const http = require('http')
+const keepAliveAgent = new http.Agent({ keepAlive: true });
+
+
 module.exports = {
   publicPath: "",
   outputDir: "www",
@@ -12,6 +16,18 @@ module.exports = {
       });
   },
 
+  configureWebpack: {
+    devServer: {
+      proxy: {
+        '/idoit': {
+          target: process.env.VUE_APP__OPEN_WEATHER_MAP_API_PROXY_TARGET,
+          pathRewrite: {'^/owm_api' : ''},
+          changeOrigin: true,
+          agent: keepAliveAgent
+        }
+      }
+    }
+  },
 
   transpileDependencies: [
     'vuetify'

@@ -29,6 +29,7 @@
   </v-card>
 </template>
 
+
 <script>
 export default {
   name: "ForecastWeatherCard",

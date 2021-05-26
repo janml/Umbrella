@@ -5,10 +5,11 @@ import store from './store'
 import vuetify from './lib/vuetify'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@fortawesome/fontawesome-free/css/all.css'
+import {ENVIRONMENT} from "@/config";
 
 
 function main() {
-  Vue.config.productionTip = process.env.NODE_ENV === "development"
+  Vue.config.productionTip = ENVIRONMENT === "development"
 
   new Vue({
     router,
