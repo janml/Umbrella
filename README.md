@@ -2,6 +2,8 @@
 Weather app written in vue.js running with the help of cordova.
 <br>"Open Weather Map" is used as the provider for the weather data.
 
+![alt text](https://raw.githubusercontent.com/janml/Umbrella/main/screenshot.png)
+
 
 ## Setup:
 Install JavaScript packages with npm:
