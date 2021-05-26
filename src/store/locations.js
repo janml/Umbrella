@@ -1,5 +1,15 @@
 
 
+class Location {
+  constructor(name, latitude, longitude, country) {
+    this.name = name
+    this.latitude = latitude
+    this.longitude = longitude
+    this.country = country
+  }
+}
+
+
 export default {
   namespaced: true,
   state: {

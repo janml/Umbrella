@@ -4,21 +4,21 @@ export default {
   namespaced: true,
   state: {
     loadingIndicatorActive: false,
-    errorPopup: {
-      open: false,
+    popup: {
+      visible: true,
       msg: String()
     }
   },
 
   mutations: {
-    openErrorPopup(state, msg) {
-      state.errorPopup.msg = msg
-      state.errorPopup.open = true
+    showPopup(state, msg) {
+      state.popup.msg = msg
+      state.popup.visible = true
     },
 
-    closeErrorPopup(state, msg) {
-      state.errorPopup.msg = String()
-      state.errorPopup.open = false
+    hidePopup(state) {
+      state.popup.msg = String()
+      state.popup.visible = false
     },
 
     showLoadingIndicator(state) {
@@ -28,5 +28,11 @@ export default {
     hideLoadingIndicator(state) {
       state.loadingIndicatorActive = false
     },
+  },
+
+  getters: {
+    loadingIndicatorActive: (state) => {return state.loadingIndicatorActive},
+    popupVisible: (state) => {return state.popup.visible},
+    popupMsg: (state) => {return state.popup.msg}
   }
 }

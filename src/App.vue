@@ -3,13 +3,19 @@
     <v-main>
       <router-view></router-view>
     </v-main>
+    <LoadingIndicator></LoadingIndicator>
+    <Popup></Popup>
   </v-app>
 </template>
 
 <script>
+import LoadingIndicator from "@/components/LoadingIndicator";
+import Popup from "@/components/Popup";
+
 
 export default {
   name: 'App',
+  components: {Popup, LoadingIndicator},
 };
 </script>
 
