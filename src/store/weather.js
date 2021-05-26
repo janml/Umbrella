@@ -18,10 +18,29 @@ export default {
   },
 
   getters: {
-    getLocation: (state) => {return state.location},
-    getCurrentWeather: (state) => {return state.currentWeather},
-    getHourlyForecast: (state) => {return state.hourlyForecast},
-    getDailyForecast: (state) => {return state.dailyForecast}
+    getLocation: (state) => {
+      return state.location
+    },
+
+    getCurrentWeather: (state) => {
+      if (!state.currentWeather) {return null}
+
+      return {
+        temperature: Math.round(state.currentWeather['temp']),
+        humidity: state.currentWeather['humidity'],
+        description: state.currentWeather['weather'][0]['description'],
+        airPressure: state.currentWeather['pressure'],
+        windSpeed: state.currentWeather['wind_speed']
+      }
+    },
+
+    getHourlyForecast: (state) => {
+      return state.hourlyForecast
+    },
+
+    getDailyForecast: (state) => {
+      return state.dailyForecast
+    }
   },
 
   actions: {

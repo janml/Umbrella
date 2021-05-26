@@ -2,7 +2,7 @@
 <widget id="org.weather" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Umbrella</name>
     <content src="index.html" />
-    <access origin="*" />
+    <access origin="https://api.openweathermap.org" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="geo:*" />

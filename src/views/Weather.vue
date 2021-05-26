@@ -1,31 +1,37 @@
 <template>
   <div>
     <v-app-bar class="is-transparent" app fixed>
-      <v-app-bar-nav-icon class="white--text"></v-app-bar-nav-icon>
+      <v-btn icon color="white">
+        <v-icon>fa-align-left</v-icon>
+      </v-btn>
       <v-card-title class="white--text">{{location.name}}</v-card-title>
+      <v-spacer></v-spacer>
+      <v-btn icon color="white">
+        <v-icon>fa-heart</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-container>
 
       <!-- Current weather-->
       <v-card class="is-transparent" v-if="currentWeather">
         <p class="pl-5 pt-5 is-white">
-          {{currentWeather['weather'][0]['description']}}
+          {{currentWeather.description}}
         </p>
         <p class="text-h1 pl-5 is-white">
-          {{Math.round(currentWeather['temp'])}}°C
+          {{currentWeather.temperature}}°C
         </p>
         <v-row class="text-center">
           <v-col class="is-white">
             <v-icon color="white">fa-wind</v-icon>
-            <p>{{currentWeather['wind_speed']}} km/h</p>
+            <p>{{currentWeather.windSpeed}} km/h</p>
           </v-col>
           <v-col class="is-white">
             <v-icon color="white">fa-tint</v-icon>
-            <p>{{currentWeather['humidity']}} %</p>
+            <p>{{currentWeather.humidity}} %</p>
           </v-col>
           <v-col class="is-white">
             <v-icon color="white">fa-compress-arrows-alt</v-icon>
-            <p>{{currentWeather['pressure']}} hPa</p>
+            <p>{{currentWeather.airPressure}} hPa</p>
           </v-col>
         </v-row>
       </v-card>
@@ -58,10 +64,23 @@ export default {
     })
   },
 
+  methods: {
+    async loadWeather() {
+      this.$store.commit("ui/showLoadingIndicator")
+      try {
+        await this.$store.dispatch("weather/requestWeatherConditions")
+      }
+      catch (error) {
+        this.$store.commit("ui/showPopup", error.message)
+      }
+      finally {
+        this.$store.commit("ui/hideLoadingIndicator")
+      }
+    }
+  },
+
   async mounted() {
-    this.$store.commit("ui/showLoadingIndicator")
-    await this.$store.dispatch("weather/requestWeatherConditions")
-    this.$store.commit("ui/hideLoadingIndicator")
+    await this.loadWeather()
   }
 }
 </script>
