@@ -5,7 +5,7 @@ export default {
   state: {
     loadingIndicatorActive: false,
     popup: {
-      visible: true,
+      visible: false,
       msg: String()
     }
   },

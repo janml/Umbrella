@@ -1,11 +1,10 @@
 
 
 class Location {
-  constructor(name, latitude, longitude, country) {
+  constructor(name, latitude, longitude) {
     this.name = name
     this.latitude = latitude
     this.longitude = longitude
-    this.country = country
   }
 }
 

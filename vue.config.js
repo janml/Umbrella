@@ -19,7 +19,7 @@ module.exports = {
   configureWebpack: {
     devServer: {
       proxy: {
-        '/idoit': {
+        '/owm_api': {
           target: process.env.VUE_APP__OPEN_WEATHER_MAP_API_PROXY_TARGET,
           pathRewrite: {'^/owm_api' : ''},
           changeOrigin: true,
