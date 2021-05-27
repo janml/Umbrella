@@ -5,7 +5,13 @@
         <v-list-item-title class="white--text">
           {{item.time}}
         </v-list-item-title>
-        <v-img :src="item.iconUrl" width="50" class="mr-3"></v-img>
+        <v-img :src="item.iconUrl" width="50" class="mr-3">
+          <template v-slot:placeholder>
+            <v-row class="fill-height ma-0" align="center" justify="center">
+              <v-progress-circular indeterminate color="grey lighten-5" size="20"></v-progress-circular>
+            </v-row>
+          </template>
+        </v-img>
         <v-list-item-subtitle class="white--text text-left">
           {{item.temperature}} °C
         </v-list-item-subtitle>
