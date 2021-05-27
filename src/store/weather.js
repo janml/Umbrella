@@ -1,8 +1,13 @@
 import owm_client from "@/api/owm_client";
+import moment from "moment"
+
+
+const FORECAST_DATA_LENGTH = 5
 
 
 export default {
   namespaced: true,
+
   state: {
     location: {name: "Hannover", latitude: 52.3758916, longitude: 9.7320104},
     currentWeather: null,
@@ -11,10 +16,21 @@ export default {
   },
 
   mutations: {
-    setLocation(state, location) {state.location = location},
-    setCurrentWeather(state, currentWeather) {state.currentWeather = currentWeather; console.log(JSON.stringify(currentWeather, null, 2))},
-    setHourlyForecast(state, hourlyForecast) {state.hourlyForecast = hourlyForecast},
-    setDailyForecast(state, dailyForecast) {state.dailyForecast = dailyForecast}
+    setLocation(state, location) {
+      state.location = location
+    },
+
+    setCurrentWeather(state, currentWeather) {
+      state.currentWeather = currentWeather
+    },
+
+    setHourlyForecast(state, hourlyForecast) {
+      state.hourlyForecast = hourlyForecast
+    },
+
+    setDailyForecast(state, dailyForecast) {
+      state.dailyForecast = dailyForecast
+    }
   },
 
   getters: {
@@ -35,7 +51,25 @@ export default {
     },
 
     getHourlyForecast: (state) => {
-      return state.hourlyForecast
+      let hourlyForecast = Array()
+      let now = moment.now()
+
+      if (!state.hourlyForecast) {return }
+
+      for (let forecast of state.hourlyForecast) {
+        if (hourlyForecast.length === FORECAST_DATA_LENGTH) {break}
+
+        let forecastTimestamp = moment.unix(forecast["dt"])
+        if (now < forecastTimestamp) {  // Only using forecast data ...
+          hourlyForecast.push({
+            time: forecastTimestamp.format("HH:mm"),
+            temperature: forecast["temp"],
+            iconUrl: owm_client.buildIconUrl(forecast["weather"][0]["icon"]),
+            humidity: forecast["humidity"]
+          })
+        }
+      }
+      return hourlyForecast
     },
 
     getDailyForecast: (state) => {
@@ -46,8 +80,10 @@ export default {
   actions: {
     async requestWeatherConditions(context) {
       let location = context.getters.getLocation
-      let response = await owm_client.requestWeatherConditions(location.latitude, location.longitude)
-      context.commit("setCurrentWeather", response["current"])
+      let weather = await owm_client.requestWeatherConditions(location.latitude, location.longitude)
+      context.commit("setCurrentWeather", weather["current"])
+      context.commit("setHourlyForecast", weather["hourly"])
+      context.commit("setDailyForecast", weather["daily"])
     }
   }
 }

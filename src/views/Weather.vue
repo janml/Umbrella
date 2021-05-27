@@ -10,51 +10,26 @@
         <v-icon>fa-heart</v-icon>
       </v-btn>
     </v-app-bar>
+
     <v-container>
-
       <!-- Current weather-->
-      <v-card class="is-transparent" v-if="currentWeather">
-        <p class="pl-5 pt-5 is-white">
-          {{currentWeather.description}}
-        </p>
-        <p class="text-h1 pl-5 is-white">
-          {{currentWeather.temperature}}°C
-        </p>
-        <v-row class="text-center">
-          <v-col class="is-white">
-            <v-icon color="white">fa-wind</v-icon>
-            <p>{{currentWeather.windSpeed}} km/h</p>
-          </v-col>
-          <v-col class="is-white">
-            <v-icon color="white">fa-tint</v-icon>
-            <p>{{currentWeather.humidity}} %</p>
-          </v-col>
-          <v-col class="is-white">
-            <v-icon color="white">fa-compress-arrows-alt</v-icon>
-            <p>{{currentWeather.airPressure}} hPa</p>
-          </v-col>
-        </v-row>
-      </v-card>
-
+      <CurrentWeatherCard :current-weather="currentWeather" v-if="currentWeather"></CurrentWeatherCard>
       <!-- Hourly forecast -->
-      <ForecastWeatherCard :forecast="hourlyForecast" v-if="hourlyForecast"></ForecastWeatherCard>
-
-      <!-- Daily forecast -->
-      <ForecastWeatherCard :forecast="hourlyForecast" v-if="dailyForecast"></ForecastWeatherCard>
-
+      <HourlyForecastCard :forecast="hourlyForecast" v-if="hourlyForecast"></HourlyForecastCard>
     </v-container>
   </div>
 </template>
 
 
 <script>
-import ForecastWeatherCard from "@/components/ForecastWeatherCard";
+import HourlyForecastCard from "@/components/HourlyForecastCard";
 import {mapGetters} from "vuex"
+import CurrentWeatherCard from "@/components/CurrentWeatherCard";
 
 
 export default {
   name: "Weather",
-  components: {ForecastWeatherCard},
+  components: {CurrentWeatherCard, HourlyForecastCard},
   computed: {
     ...mapGetters({
       "location": "weather/getLocation",

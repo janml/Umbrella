@@ -16,8 +16,12 @@ class OpenWeatherMapClient {
 
   async requestWeatherConditions(latitude, longitude) {
     let response = await axios.get(`${this.url}/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${this.key}&lang=${this.language}&units=${this.unit}`)
-    //console.log(JSON.stringify(response.data, null, 2))
+    console.log(JSON.stringify(response.data, null, 2))
     return response.data
+  }
+
+  buildIconUrl(iconId) {
+    return `https://openweathermap.org/img/wn/${iconId}@4x.png`
   }
 }
 
