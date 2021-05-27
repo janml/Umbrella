@@ -6,16 +6,18 @@ import vuetify from './lib/vuetify'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import {ENVIRONMENT} from "@/config";
+import i18n from "@/localisation";
 
 
 function main() {
   Vue.config.productionTip = ENVIRONMENT === "development"
 
   new Vue({
+    i18n,
     router,
     store,
     vuetify,
-    render: function (h) { return h(App) }
+    render(root) {return root(App)}
   }).$mount('#app')
 }
 
