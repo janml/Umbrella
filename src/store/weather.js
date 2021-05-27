@@ -1,8 +1,8 @@
 import owm_client from "@/api/owm_client";
-import moment from "moment"
+import moment from "@/lib/moment";
 
 
-const FORECAST_DATA_LENGTH = 5
+const FORECAST_MAX_ENTRIES = 5
 
 
 export default {
@@ -57,9 +57,10 @@ export default {
       if (!state.hourlyForecast) {return }
 
       for (let forecast of state.hourlyForecast) {
-        if (hourlyForecast.length === FORECAST_DATA_LENGTH) {break}
+        if (hourlyForecast.length === FORECAST_MAX_ENTRIES) {break}
 
         let forecastTimestamp = moment.unix(forecast["dt"])
+
         if (now < forecastTimestamp) {  // Only using forecast data ...
           hourlyForecast.push({
             time: forecastTimestamp.format("HH:mm"),
@@ -73,7 +74,25 @@ export default {
     },
 
     getDailyForecast: (state) => {
-      return state.dailyForecast
+      let dailyForecast = Array()
+      let today = moment.now()
+
+      if (!state.dailyForecast) {return }
+      for (let forecast of state.dailyForecast) {
+        if (dailyForecast.length === FORECAST_MAX_ENTRIES) {break}
+
+        let forecastTimestamp = moment.unix(forecast["dt"])
+
+        if (today < forecastTimestamp) {
+          dailyForecast.push({
+            day: forecastTimestamp.format("dddd"),
+            minTemperature: forecast["temp"]["min"],
+            maxTemperature: forecast["temp"]["max"],
+            iconUrl: owm_client.buildIconUrl(forecast["weather"][0]["icon"])
+          })
+        }
+      }
+      return dailyForecast
     }
   },
 

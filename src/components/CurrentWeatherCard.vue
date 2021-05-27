@@ -23,18 +23,20 @@
   </v-card>
 </template>
 
+
 <script>
 export default {
   name: "CurrentWeatherCard",
   props: {
     currentWeather: {
       type: Object,
+      required: true,
       default: {
-        description: "Some clouds",
-        temperature: 20,
-        windSpeed: 5,
-        humidity: 60,
-        airPressure: 1000
+        description: String,
+        temperature: Number,
+        windSpeed: Number,
+        humidity: Number,
+        airPressure: Number
       }
     }
   }

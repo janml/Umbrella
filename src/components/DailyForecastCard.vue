@@ -2,9 +2,13 @@
   <v-card class="is-transparent mt-6">
     <v-list class="transparent">
       <v-list-item v-for="(item, i) in forecast" :key="i">
+
+        <!-- Day -->
         <v-list-item-title class="white--text">
-          {{item.time}}
+          {{item.day}}
         </v-list-item-title>
+
+        <!-- Icon -->
         <v-img :src="item.iconUrl" width="50" class="mr-3">
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" align="center" justify="center">
@@ -12,17 +16,27 @@
             </v-row>
           </template>
         </v-img>
-        <v-list-item-subtitle class="white--text text-left">
-          {{item.temperature}} °C
-        </v-list-item-subtitle>
-        <v-list-item-icon class="ml-8">
+
+        <!-- Min temperature -->
+        <v-list-item-icon>
           <v-icon color="white" small>
-            fa-tint
+            fa-long-arrow-alt-down
           </v-icon>
         </v-list-item-icon>
         <v-list-item-subtitle class="white--text">
-          {{item.humidity}} %
+          {{item.minTemperature}} °C
         </v-list-item-subtitle>
+
+        <!-- Max temperature -->
+        <v-list-item-icon>
+          <v-icon color="white" small>
+            fa-long-arrow-alt-up
+          </v-icon>
+        </v-list-item-icon>
+        <v-list-item-subtitle class="white--text">
+          {{item.maxTemperature}} °C
+        </v-list-item-subtitle>
+
       </v-list-item>
     </v-list>
   </v-card>
@@ -31,18 +45,17 @@
 
 <script>
 export default {
-  name: "HourlyForecastCard",
+  name: "DailyForecastCard",
   props: {
     forecast: {
       type: Array,
-      required: true,
       default: [
         {
-          time: String,
-          temp: Number,
-          humidity: Number,
-          iconUrl: String
-        },
+          day: String,
+          iconUrl: String,
+          minTemperature: Number,
+          maxTemperature: Number
+        }
       ]
     }
   }

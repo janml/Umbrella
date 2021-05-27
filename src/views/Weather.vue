@@ -16,20 +16,24 @@
       <CurrentWeatherCard :current-weather="currentWeather" v-if="currentWeather"></CurrentWeatherCard>
       <!-- Hourly forecast -->
       <HourlyForecastCard :forecast="hourlyForecast" v-if="hourlyForecast"></HourlyForecastCard>
+      <!-- Daily forecast -->
+      <DailyForecastCard :forecast="dailyForecast" v-if="dailyForecast"></DailyForecastCard>
     </v-container>
   </div>
 </template>
 
 
 <script>
-import HourlyForecastCard from "@/components/HourlyForecastCard";
 import {mapGetters} from "vuex"
 import CurrentWeatherCard from "@/components/CurrentWeatherCard";
+import HourlyForecastCard from "@/components/HourlyForecastCard";
+import DailyForecastCard from "@/components/DailyForecastCard";
 
 
 export default {
   name: "Weather",
-  components: {CurrentWeatherCard, HourlyForecastCard},
+  components: {DailyForecastCard, CurrentWeatherCard, HourlyForecastCard},
+
   computed: {
     ...mapGetters({
       "location": "weather/getLocation",
@@ -42,6 +46,7 @@ export default {
   methods: {
     async loadWeather() {
       this.$store.commit("ui/showLoadingIndicator")
+
       try {
         await this.$store.dispatch("weather/requestWeatherConditions")
       }
