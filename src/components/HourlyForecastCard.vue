@@ -12,9 +12,14 @@
           <template v-for="(item, i) in forecast">
             <v-list-item>
               <v-list-item-avatar>
-                <v-img src="../assets/icon.png"></v-img>
+                <v-img :src="item.iconUrl">
+                  <template v-slot:placeholder>
+                    <v-row class="fill-height ma-0" align="center" justify="center">
+                      <v-progress-circular indeterminate color="white" size="20" width="2"></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
               </v-list-item-avatar>
-
               <v-list-item-content>
                 <v-list-item-title class="white--text">{{item.time}}</v-list-item-title>
                 <v-list-item-subtitle class="white--text"><strong>{{item.temperature}} °C</strong> ({{item.description}})</v-list-item-subtitle>

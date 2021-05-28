@@ -2,7 +2,7 @@
   <v-expansion-panels class="mt-6">
     <v-expansion-panel class="is-transparent white--text">
       <v-expansion-panel-header class="white--text subtitle-1">
-        {{$t('Daily forecast')}}
+        {{$t('Next days')}}
         <template v-slot:actions>
           <v-icon color="white" small>$expand</v-icon>
         </template>
@@ -12,7 +12,13 @@
           <template v-for="item in forecast">
             <v-list-item>
               <v-list-item-avatar>
-                <v-img src="../assets/icon.png"></v-img>
+                <v-img :src="item.iconUrl">
+                  <template v-slot:placeholder>
+                    <v-row class="fill-height ma-0" align="center" justify="center">
+                      <v-progress-circular indeterminate color="white" size="20" width="2"></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="white--text">{{item.day}}</v-list-item-title>
