@@ -25,7 +25,7 @@ export default {
     },
 
     removeFavouriteLocation(state, location) {
-
+      state.favouriteLocations.splice(state.favouriteLocations.indexOf(location), 1)
     }
   },
 

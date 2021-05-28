@@ -6,7 +6,7 @@
       </v-btn>
       <v-card-title class="white--text">{{location.name}}</v-card-title>
       <v-spacer></v-spacer>
-      <v-btn icon color="white">
+      <v-btn icon color="white" @click="addCurrentLocationToFavourites">
         <v-icon>fa-heart</v-icon>
       </v-btn>
       <v-btn icon color="white" @click="$router.push({name: 'Search'})">
@@ -59,6 +59,11 @@ export default {
       finally {
         this.$store.commit("ui/hideLoadingIndicator")
       }
+    },
+
+    addCurrentLocationToFavourites() {
+      this.$store.commit("locations/addFavouriteLocation", this.location)
+      this.$store.commit("ui/showPopup", this.$t("Location has been added to favourites."))
     }
   },
 
