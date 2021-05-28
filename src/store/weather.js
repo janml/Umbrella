@@ -2,7 +2,7 @@ import owm_client from "@/api/owm_client";
 import moment from "@/lib/moment";
 
 
-const FORECAST_MAX_ENTRIES = 5
+const FORECAST_MAX_ENTRIES = 10
 
 
 export default {
@@ -64,9 +64,10 @@ export default {
         if (now < forecastTimestamp) {  // Only using forecast data ...
           hourlyForecast.push({
             time: forecastTimestamp.format("HH:mm"),
-            temperature: forecast["temp"],
+            temperature: Math.round(forecast["temp"]),
             iconUrl: owm_client.buildIconUrl(forecast["weather"][0]["icon"]),
-            humidity: forecast["humidity"]
+            humidity: forecast["humidity"],
+            description: forecast["weather"][0]["description"]
           })
         }
       }
@@ -85,10 +86,11 @@ export default {
 
         if (today < forecastTimestamp) {
           dailyForecast.push({
-            day: forecastTimestamp.format("dddd"),
+            day: forecastTimestamp.format("dddd D.MMM"),
             minTemperature: forecast["temp"]["min"],
             maxTemperature: forecast["temp"]["max"],
-            iconUrl: owm_client.buildIconUrl(forecast["weather"][0]["icon"])
+            iconUrl: owm_client.buildIconUrl(forecast["weather"][0]["icon"]),
+            description: forecast["weather"][0]["description"]
           })
         }
       }

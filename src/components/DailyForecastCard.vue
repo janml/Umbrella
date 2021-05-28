@@ -1,54 +1,26 @@
 <template>
   <v-expansion-panels class="mt-6">
-      <v-expansion-panel class="is-transparent white--text">
-        <v-expansion-panel-header class="white--text subtitle-1">
-          {{$t('Daily forecast')}}
-          <template v-slot:actions>
-            <v-icon color="white" small>$expand</v-icon>
-          </template>
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-        <v-card class="transparent" elevation="0">
-          <v-list class="transparent">
-            <v-list-item v-for="(item, i) in forecast" :key="i">
-
-              <!-- Day -->
-              <v-list-item-title class="white--text">
-                {{item.day}}
-              </v-list-item-title>
-
-              <!-- Icon -->
-              <v-img :src="item.iconUrl" width="50" class="mr-3">
-                <template v-slot:placeholder>
-                  <v-row class="fill-height ma-0" align="center" justify="center">
-                    <v-progress-circular indeterminate color="grey lighten-5" size="20"></v-progress-circular>
-                  </v-row>
-                </template>
-              </v-img>
-
-              <!-- Min temperature -->
-              <v-list-item-icon>
-                <v-icon color="white" small>
-                  fa-long-arrow-alt-down
-                </v-icon>
-              </v-list-item-icon>
-              <v-list-item-subtitle class="white--text">
-                {{item.minTemperature}} °C
-              </v-list-item-subtitle>
-
-              <!-- Max temperature -->
-              <v-list-item-icon>
-                <v-icon color="white" small>
-                  fa-long-arrow-alt-up
-                </v-icon>
-              </v-list-item-icon>
-              <v-list-item-subtitle class="white--text">
-                {{item.maxTemperature}} °C
-              </v-list-item-subtitle>
-
+    <v-expansion-panel class="is-transparent white--text">
+      <v-expansion-panel-header class="white--text subtitle-1">
+        {{$t('Daily forecast')}}
+        <template v-slot:actions>
+          <v-icon color="white" small>$expand</v-icon>
+        </template>
+      </v-expansion-panel-header>
+      <v-expansion-panel-content>
+        <v-list two-line class="transparent">
+          <template v-for="item in forecast">
+            <v-list-item>
+              <v-list-item-avatar>
+                <v-img src="../assets/icon.png"></v-img>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title class="white--text">{{item.day}}</v-list-item-title>
+                <v-list-item-subtitle class="white--text"><strong>↑ {{item.maxTemperature}} °C ↓ {{item.minTemperature}} °C</strong><br>{{item.description}}</v-list-item-subtitle>
+              </v-list-item-content>
             </v-list-item>
-          </v-list>
-        </v-card>
+          </template>
+        </v-list>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>
