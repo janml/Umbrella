@@ -11,15 +11,10 @@ async function getCurrentGpsPosition() {
 export default {
   namespaced: true,
   state: {
-    locationSearchResults: Array(),
     favouriteLocations: Array()
   },
 
   mutations: {
-    setLocationSearchResults(state, searchResults) {
-      state.locationSearchResults = searchResults
-    },
-
     addFavouriteLocation(state, location) {
       state.favouriteLocations.push(location)
     },
@@ -30,10 +25,6 @@ export default {
   },
 
   getters: {
-    getSearchResults: (state) => {
-      return state.locationSearchResults
-    },
-
     getFavouriteLocations: (state) => {
       return state.favouriteLocations
     }
@@ -46,9 +37,8 @@ export default {
       context.commit("setLocationSearchResults", locations)
     },
 
-    async loadLocationSearchResultsFromSearchTerm(context, {searchTerm}) {
-      let locations = await owm_client.getLocationsFromSearchTerm(searchTerm)
-      context.commit("setLocationSearchResults", locations)
+    async getLocationsBySearchTerm(context, {searchTerm}) {
+      return await owm_client.getLocationsFromSearchTerm(searchTerm)
     }
   }
 }

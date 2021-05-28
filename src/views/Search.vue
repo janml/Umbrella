@@ -5,8 +5,8 @@
         <v-icon>fa-chevron-left</v-icon>
       </v-btn>
 
-      <v-text-field color="white" class="mt-4" :placeholder="$t('Location')" dark v-model="searchTerm"></v-text-field>
-      <v-btn icon color="white" @click="loadLocationFromSearchTerm">
+      <v-text-field color="white" class="mt-4" :placeholder="$t('Location')" dark v-model="searchTerm" autofocus></v-text-field>
+      <v-btn icon color="white" @click="loadLocationsFromSearchTerm">
         <v-icon>fa-search</v-icon>
       </v-btn>
       <v-btn icon color="white" @click="loadLocationFromCurrentGpsPosition">
@@ -35,21 +35,13 @@
 
 
 <script>
-import {mapGetters} from "vuex"
-
-
 export default {
   name: "Search",
 
-  computed: {
-    ...mapGetters({
-      "locationSearchResults": "locations/getSearchResults"
-    })
-  },
-
   data() {
     return {
-      searchTerm: String()
+      searchTerm: String(),
+      locationSearchResults: Array()
     }
   },
 
@@ -67,10 +59,13 @@ export default {
       }
     },
 
-    async loadLocationFromSearchTerm() {
+    async loadLocationsFromSearchTerm() {
       this.$store.commit("ui/showLoadingIndicator")
       try {
-        await this.$store.dispatch("locations/loadLocationSearchResultsFromSearchTerm", {searchTerm: this.searchTerm})
+        this.locationSearchResults = await this.$store.dispatch(
+            "locations/getLocationsBySearchTerm",
+            {searchTerm: this.searchTerm}
+        )
       }
       catch (error) {
         this.$store.commit("ui/showPopup", this.$t(error.message))

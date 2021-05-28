@@ -24,7 +24,10 @@ function main() {
 
 if (window.cordova) {
   // Wait for cordova webview to be loaded and ready to use !
-  document.addEventListener("deviceready", () => {main()})
+  document.addEventListener("deviceready", () => {
+    window.screen.orientation.lock("portrait")
+    main()
+  })
 }
 
 else {

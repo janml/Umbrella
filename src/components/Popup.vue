@@ -1,17 +1,17 @@
 <template>
-  <v-dialog v-model="visible" width="500">
-      <v-card class="popup-card">
-        <v-card-text class="pa-6 title white--text popup-text">
-           {{msg}}
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="white" text @click="$store.commit('ui/hidePopup')">
-            Okay
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+  <v-dialog v-model="visible" width="500" persistent>
+    <v-card class="popup-card">
+      <v-card-text class="pa-6 title white--text popup-text">
+         {{msg}}
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="white" text @click="$store.commit('ui/hidePopup')">
+          Okay
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 
