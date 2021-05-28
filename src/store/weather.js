@@ -9,7 +9,7 @@ export default {
   namespaced: true,
 
   state: {
-    location: {name: "Hannover", latitude: 52.3758916, longitude: 9.7320104},
+    location: null,
     currentWeather: null,
     hourlyForecast: null,
     dailyForecast: null
@@ -17,6 +17,7 @@ export default {
 
   mutations: {
     setLocation(state, location) {
+      console.log(`setting location ${JSON.stringify(location)}`)
       state.location = location
     },
 
@@ -101,7 +102,9 @@ export default {
   actions: {
     async requestWeatherConditions(context) {
       let location = context.getters.getLocation
-      let weather = await owm_client.requestWeatherConditions(location.latitude, location.longitude)
+      console.log(JSON.stringify(location, null, 2))
+
+      let weather = await owm_client.requestWeatherConditions(location.lat, location.lon)
       context.commit("setCurrentWeather", weather["current"])
       context.commit("setHourlyForecast", weather["hourly"])
       context.commit("setDailyForecast", weather["daily"])

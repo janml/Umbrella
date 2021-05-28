@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import weather from "@/store/weather";
-import locations from "@/store/locations";
 import ui from "@/store/ui";
+import locations from "@/store/locations";
 
 
 Vue.use(Vuex)

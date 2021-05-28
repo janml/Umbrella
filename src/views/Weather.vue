@@ -1,13 +1,16 @@
 <template>
   <div>
     <v-app-bar class="is-transparent" app fixed>
-      <v-btn icon color="white">
+      <v-btn icon color="white" @click="$router.push({name: 'Menu'})">
         <v-icon>fa-align-left</v-icon>
       </v-btn>
       <v-card-title class="white--text">{{location.name}}</v-card-title>
       <v-spacer></v-spacer>
       <v-btn icon color="white">
         <v-icon>fa-heart</v-icon>
+      </v-btn>
+      <v-btn icon color="white" @click="$router.push({name: 'Search'})">
+        <v-icon>fa-search</v-icon>
       </v-btn>
     </v-app-bar>
 

@@ -16,12 +16,21 @@ class OpenWeatherMapClient {
 
   async requestWeatherConditions(latitude, longitude) {
     let response = await axios.get(`${this.url}/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${this.key}&lang=${this.language}&units=${this.unit}`)
-    console.log(JSON.stringify(response.data, null, 2))
     return response.data
   }
 
   buildIconUrl(iconId) {
     return `https://openweathermap.org/img/wn/${iconId}@4x.png`
+  }
+
+  async getLocationsFromGpsPosition(latitude, longitude, limit=5) {
+    let response = await axios.get(`${this.url}/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=${limit}&appid=${this.key}&lang=${this.language}`)
+    return response.data
+  }
+
+  async getLocationsFromSearchTerm(searchTerm, limit=5) {
+    let response = await axios.get(`${this.url}/geo/1.0/direct?q=${searchTerm}&limit=${limit}&appid=${this.key}&lang=${this.language}`)
+    return response.data
   }
 }
 
