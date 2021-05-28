@@ -5,12 +5,18 @@
         <v-icon>fa-chevron-left</v-icon>
       </v-btn>
 
-      <v-text-field color="white" class="mt-4" :placeholder="$t('Location')" dark v-model="searchTerm" autofocus></v-text-field>
+      <v-text-field
+          color="white"
+          class="mt-4"
+          dark
+          autofocus
+          :placeholder="$t('Location')"
+          v-model="searchTerm"
+          v-on:keyup.enter="loadLocationsFromSearchTerm"
+      ></v-text-field>
+
       <v-btn icon color="white" @click="loadLocationsFromSearchTerm">
         <v-icon>fa-search</v-icon>
-      </v-btn>
-      <v-btn icon color="white" @click="loadLocationFromCurrentGpsPosition">
-        <v-icon>fa-map-marker-alt</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -46,19 +52,6 @@ export default {
   },
 
   methods: {
-    async loadLocationFromCurrentGpsPosition() {
-      this.$store.commit("ui/showLoadingIndicator")
-      try {
-        await this.$store.dispatch("locations/loadLocationSearchResultsFromCurrentGpsPosition")
-      }
-      catch (error) {
-        this.$store.commit("ui/showPopup", this.$t(error.message))
-      }
-      finally {
-        this.$store.commit("ui/hideLoadingIndicator")
-      }
-    },
-
     async loadLocationsFromSearchTerm() {
       this.$store.commit("ui/showLoadingIndicator")
       try {

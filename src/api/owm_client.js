@@ -19,18 +19,14 @@ class OpenWeatherMapClient {
     return response.data
   }
 
-  buildIconUrl(iconId) {
-    return `https://openweathermap.org/img/wn/${iconId}@4x.png`
-  }
-
-  async getLocationsFromGpsPosition(latitude, longitude, limit=5) {
-    let response = await axios.get(`${this.url}/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=${limit}&appid=${this.key}&lang=${this.language}`)
-    return response.data
-  }
 
   async getLocationsFromSearchTerm(searchTerm, limit=5) {
     let response = await axios.get(`${this.url}/geo/1.0/direct?q=${searchTerm}&limit=${limit}&appid=${this.key}&lang=${this.language}`)
     return response.data
+  }
+
+  buildIconUrl(iconId) {
+    return `https://openweathermap.org/img/wn/${iconId}@4x.png`
   }
 }
 
