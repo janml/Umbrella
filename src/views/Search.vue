@@ -17,10 +17,15 @@
     <v-container>
       <v-card class="is-transparent mb-3" v-for="(location, i) in locationSearchResults" :key="i">
         <v-list-item-group>
-          <v-list-item @click="enterWeatherView(location)">
-            <v-list-item-content>
+          <v-list-item>
+            <v-list-item-content @click="enterWeatherView(location)">
               <v-list-item-title class="white--text">{{location.name}} ({{location.country}})</v-list-item-title>
             </v-list-item-content>
+            <v-list-item-action>
+              <v-btn icon @click="addLocationToFavourites(location)">
+                <v-icon color="white" small>fa-heart</v-icon>
+              </v-btn>
+            </v-list-item-action>
           </v-list-item>
         </v-list-item-group>
       </v-card>
@@ -78,6 +83,11 @@ export default {
     enterWeatherView(location) {
       this.$store.commit("weather/setLocation", location)
       this.$router.push({name: "Weather"})
+    },
+
+    addLocationToFavourites(location) {
+      this.$store.commit("locations/addFavouriteLocation", location)
+      this.$store.commit("ui/showPopup", this.$t("Location has been added to favourites."))
     }
   }
 }
