@@ -4,7 +4,7 @@
       <v-btn icon color="white" @click="$router.push({name: 'Menu'})">
         <v-icon>fa-align-left</v-icon>
       </v-btn>
-      <v-card-title class="white--text">{{location.name}}</v-card-title>
+      <v-card-title class="white--text" v-if="location">{{location.name}}</v-card-title>
       <v-spacer></v-spacer>
       <v-btn icon color="white" @click="addLocationToFavourites">
         <v-icon>fa-heart</v-icon>
@@ -14,7 +14,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-container>
+    <v-container v-if="location">
       <CurrentWeatherCard :current-weather="currentWeather" v-if="currentWeather"></CurrentWeatherCard>
       <HourlyForecastCard :forecast="hourlyForecast" v-if="hourlyForecast"></HourlyForecastCard>
       <DailyForecastCard :forecast="dailyForecast" v-if="dailyForecast"></DailyForecastCard>
@@ -65,7 +65,7 @@ export default {
   },
 
   async mounted() {
-    await this.loadWeather()
+    if (!this.location) {this.$router.go(-1)} else {await this.loadWeather()}
   }
 }
 </script>

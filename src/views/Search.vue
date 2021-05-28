@@ -2,7 +2,7 @@
   <div>
     <v-app-bar class="is-transparent" app fixed>
       <v-btn icon color="white" @click="$router.push({name: 'Menu'})">
-        <v-icon>fa-chevron-left</v-icon>
+        <v-icon>fa-align-left</v-icon>
       </v-btn>
 
       <v-text-field
@@ -53,18 +53,20 @@ export default {
 
   methods: {
     async loadLocationsFromSearchTerm() {
-      this.$store.commit("ui/showLoadingIndicator")
-      try {
-        this.locationSearchResults = await this.$store.dispatch(
-            "locations/getLocationsBySearchTerm",
-            {searchTerm: this.searchTerm}
-        )
-      }
-      catch (error) {
-        this.$store.commit("ui/showPopup", this.$t(error.message))
-      }
-      finally {
-        this.$store.commit("ui/hideLoadingIndicator")
+      if (this.searchTerm) {
+        this.$store.commit("ui/showLoadingIndicator")
+        try {
+          this.locationSearchResults = await this.$store.dispatch(
+              "locations/getLocationsBySearchTerm",
+              {searchTerm: this.searchTerm}
+          )
+        }
+        catch (error) {
+          this.$store.commit("ui/showPopup", this.$t(error.message))
+        }
+        finally {
+          this.$store.commit("ui/hideLoadingIndicator")
+        }
       }
     },
 

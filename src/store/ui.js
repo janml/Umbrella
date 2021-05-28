@@ -12,7 +12,6 @@ export default {
 
   mutations: {
     showPopup(state, msg) {
-      console.log(`Popup opened with msg: ${msg}`)
       state.popup.msg = msg
       state.popup.visible = true
     },

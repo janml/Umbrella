@@ -6,20 +6,13 @@
     <p class="text-h1 pl-5 is-white">
       {{currentWeather.temperature}}°C
     </p>
-    <v-row class="text-center">
-      <v-col class="is-white">
-        <v-icon color="white">fa-wind</v-icon>
-        <p>{{currentWeather.windSpeed}} km/h</p>
-      </v-col>
-      <v-col class="is-white">
-        <v-icon color="white">fa-tint</v-icon>
-        <p>{{currentWeather.humidity}} %</p>
-      </v-col>
-      <v-col class="is-white">
-        <v-icon color="white">fa-compress-arrows-alt</v-icon>
-        <p>{{currentWeather.airPressure}} hPa</p>
-      </v-col>
-    </v-row>
+
+    <p class="pl-5 is-white">
+      <v-icon color="white" small>fa-wind</v-icon> {{$t("Wind")}}: {{currentWeather.windSpeed}} km/h
+    </p>
+    <p class="pl-5 pb-5 is-white">
+      <v-icon color="white" small>fa-tint</v-icon> {{$t("Humidity")}}: {{currentWeather.humidity}} %
+    </p>
   </v-card>
 </template>
 

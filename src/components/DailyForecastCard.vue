@@ -12,7 +12,7 @@
           <template v-for="item in forecast">
             <v-list-item>
               <v-list-item-avatar>
-                <v-img :src="item.iconUrl">
+                <v-img :src="item.iconUrl" height="55">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="white" size="20" width="2"></v-progress-circular>
@@ -22,7 +22,10 @@
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="white--text">{{item.day}}</v-list-item-title>
-                <v-list-item-subtitle class="white--text"><strong>↑ {{item.maxTemperature}} °C ↓ {{item.minTemperature}} °C</strong><br>{{item.description}}</v-list-item-subtitle>
+                <v-list-item-subtitle class="white--text">
+                  <strong>↑ {{item.maxTemperature}} °C ↓ {{item.minTemperature}} °C</strong>
+                  <br>{{item.description}}
+                </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </template>

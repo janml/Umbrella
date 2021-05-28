@@ -12,7 +12,7 @@
           <template v-for="(item, i) in forecast">
             <v-list-item>
               <v-list-item-avatar>
-                <v-img :src="item.iconUrl">
+                <v-img :src="item.iconUrl" height="55">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="white" size="20" width="2"></v-progress-circular>
