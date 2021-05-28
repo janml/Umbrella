@@ -1,9 +1,9 @@
 import owm_client from "@/api/owm_client";
 
 
-async function getCurrentGpsPosition() {
+async function getCurrentGpsPosition(timeout=10000) {
   return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
+    navigator.geolocation.getCurrentPosition(resolve, reject, {timeout: timeout});
   })
 }
 

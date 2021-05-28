@@ -6,7 +6,7 @@
       </v-btn>
       <v-card-title class="white--text">{{location.name}}</v-card-title>
       <v-spacer></v-spacer>
-      <v-btn icon color="white" @click="addCurrentLocationToFavourites">
+      <v-btn icon color="white" @click="addLocationToFavourites">
         <v-icon>fa-heart</v-icon>
       </v-btn>
       <v-btn icon color="white" @click="$router.push({name: 'Search'})">
@@ -15,11 +15,8 @@
     </v-app-bar>
 
     <v-container>
-      <!-- Current weather-->
       <CurrentWeatherCard :current-weather="currentWeather" v-if="currentWeather"></CurrentWeatherCard>
-      <!-- Hourly forecast -->
       <HourlyForecastCard :forecast="hourlyForecast" v-if="hourlyForecast"></HourlyForecastCard>
-      <!-- Daily forecast -->
       <DailyForecastCard :forecast="dailyForecast" v-if="dailyForecast"></DailyForecastCard>
     </v-container>
   </div>
@@ -54,14 +51,14 @@ export default {
         await this.$store.dispatch("weather/requestWeatherConditions")
       }
       catch (error) {
-        this.$store.commit("ui/showPopup", error.message)
+        this.$store.commit("ui/showPopup", this.$t(error.message))
       }
       finally {
         this.$store.commit("ui/hideLoadingIndicator")
       }
     },
 
-    addCurrentLocationToFavourites() {
+    addLocationToFavourites() {
       this.$store.commit("locations/addFavouriteLocation", this.location)
       this.$store.commit("ui/showPopup", this.$t("Location has been added to favourites."))
     }

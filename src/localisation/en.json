@@ -3,5 +3,7 @@
   "Daily forecast": "Daily forecast",
   "Locations": "Locations",
   "Location": "Location",
-  "Location has been added to favourites.": "Location has been added to favourites."
+  "Location has been added to favourites.": "Location has been added to favourites.",
+  "Network Error": "Network Error",
+  "Request failed with status code 401": "Authentication at OpenWeatherMap failed, API-Key might be invalid !"
 }

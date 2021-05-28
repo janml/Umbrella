@@ -3,5 +3,7 @@
   "Next days": "Nächste Tage",
   "Locations": "Standorte",
   "Location": "Standort",
-  "Location has been added to favourites.": "Standort wurde den Favouriten hinzugefügt."
+  "Location has been added to favourites.": "Standort wurde den Favouriten hinzugefügt.",
+  "Network Error": "Netzwerk Fehler",
+  "Request failed with status code 401": "Authentifizierung an OpenWeatherMap fehlgeschlagen, ungültiger API-Key !"
 }
