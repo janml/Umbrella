@@ -17,7 +17,6 @@ export default {
 
   mutations: {
     setLocation(state, location) {
-      console.log(`setting location ${JSON.stringify(location)}`)
       state.location = location
     },
 
@@ -46,7 +45,6 @@ export default {
         temperature: Math.round(state.currentWeather['temp']),
         humidity: state.currentWeather['humidity'],
         description: state.currentWeather['weather'][0]['description'],
-        airPressure: state.currentWeather['pressure'],
         windSpeed: state.currentWeather['wind_speed']
       }
     },
@@ -102,8 +100,6 @@ export default {
   actions: {
     async requestWeatherConditions(context) {
       let location = context.getters.getLocation
-      console.log(JSON.stringify(location, null, 2))
-
       let weather = await owm_client.requestWeatherConditions(location.lat, location.lon)
       context.commit("setCurrentWeather", weather["current"])
       context.commit("setHourlyForecast", weather["hourly"])
