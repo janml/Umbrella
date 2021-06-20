@@ -1,6 +1,6 @@
 # Umbrella:
-Weather app written in vue.js running with the help of cordova.
-<br>"Open Weather Map" is used as the provider for the weather data.
+Weather app written with [vue.js](vuejs.org) and [cordova](cordova.apache.org).
+<br>[OpenWeatherMap](openweathermap.org/api) is used as the weather data provider.
 
 ![](https://raw.githubusercontent.com/janml/Umbrella/main/screenshot.png)
 
