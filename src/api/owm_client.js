@@ -1,10 +1,5 @@
 import axios from "axios";
 
-import {OPEN_WEATHER_MAP_API_KEY} from "@/config";
-import {OPEN_WEATHER_MAP_API_URL} from "@/config"
-import {LOCALE} from "@/config"
-import {WEATHER_UNITS} from "@/config"
-
 
 class OpenWeatherMapClient {
   constructor(url, key, language, unit) {
@@ -32,8 +27,8 @@ class OpenWeatherMapClient {
 
 
 export default new OpenWeatherMapClient(
-  OPEN_WEATHER_MAP_API_URL,
-  OPEN_WEATHER_MAP_API_KEY,
-  LOCALE,
-  WEATHER_UNITS
+  process.env.VUE_APP__OPEN_WEATHER_MAP_API_URL,
+  process.env.VUE_APP__OPEN_WEATHER_MAP_API_KEY,
+  process.env.VUE_APP__LOCALE,
+  process.env.VUE_APP__WEATHER_UNITS
 )

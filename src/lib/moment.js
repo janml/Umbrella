@@ -1,6 +1,5 @@
 import moment from "moment";
-import {LOCALE} from "@/config";
 
 
-moment.locale(LOCALE)
+moment.locale(process.env.VUE_APP__LOCALE)
 export default moment
